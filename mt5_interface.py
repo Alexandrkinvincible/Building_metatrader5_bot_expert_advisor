@@ -32,19 +32,26 @@ def start_mt5(username, password, server, path):
         return ConnectionAbortedError
 
 
-def tick_extraction(symbols):
-    symb = str(symbols)  # Password must be a string
+def tick_extraction():
     # run pandas
     pd.set_option('display.max_columns', 500)  # number of columns to be displayed
     pd.set_option('display.width', 1500)  # max table width to display
     # set time zone to UTC
     timezone = pytz.timezone("Etc/UTC")
     # create 'datetime' objects in UTC time zone to avoid the implementation of a local time zone offset
-    utc_from = DT(2020, 5, 17, tzinfo=timezone)
-    utc_to = DT(2023, 5, 17, tzinfo=timezone)
-    # request USDJPY ticks within 11.01.2020 - 11.01.2020
-    ticks = mt5.copy_ticks_range(symb, utc_from, utc_to, mt5.COPY_TICKS_ALL)
-    print("Ticks received:", len(ticks))
+    utc_from = DT.datetime(2020, 5, 17, tzinfo=timezone)
+    utc_to = DT.datetime(2023, 5, 17, tzinfo=timezone)
+    # request USDJPY ticks within 17.05.2020 - 17.05.2023
+    try:
+        ticks = mt5.copy_ticks_range("USDJPY", utc_from, utc_to, mt5.COPY_TICKS_ALL)
+        print("Ticks variable:", ticks)
+        print("Ticks variable type:", type(ticks))
+        if ticks is not None:
+            print("Ticks received:", len(ticks))
+        else:
+            print("No ticks recieved")
+    except Exception as e:
+        print("An error occured:", str(e))
 
     # shut down connection to the MetaTrader 5 terminal
     mt5.shutdown()

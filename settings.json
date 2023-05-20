@@ -1,0 +1,9 @@
+{
+    "username": "51944481",
+    "password": "732e54b2",
+    "server": "OANDATMS-MT5",
+    "mt5Pathway": "C:/Program Files/MetaTrader 5/terminal64.exe",
+    "symbols": ["USDJPY.pro"],
+    "timeframe": "M30",
+    "pip_size": 0.01
+}

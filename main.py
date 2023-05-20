@@ -25,4 +25,4 @@ if __name__ == '__main__':
     import_filepath = "settings.json"
     project_settings = get_project_settings(import_filepath)
     mt5_interface.start_mt5(project_settings["username"], project_settings["password"], project_settings["server"], project_settings["mt5Pathway"])
-    mt5_interface.tick_extraction(project_settings["symbols"])
+    mt5_interface.tick_extraction()
