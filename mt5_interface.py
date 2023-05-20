@@ -53,6 +53,16 @@ def tick_extraction():
     except Exception as e:
         print("An error occured:", str(e))
 
+    # Create DataFrame out of the obtained data
+    ticks_frame = pd.DataFrame(ticks)
+    # Convert time in seconds into the datetime format
+    ticks_frame['time'] = pd.to_datetime(ticks_frame['time'], unit='s')
+
+    # Save DataFrame to a CSV file
+    ticks_frame.to_csv("ticks_data.csv", index=False)
+    print("Ticks data saved to 'ticks_data.csv'")
+
+
     # shut down connection to the MetaTrader 5 terminal
     mt5.shutdown()
 
